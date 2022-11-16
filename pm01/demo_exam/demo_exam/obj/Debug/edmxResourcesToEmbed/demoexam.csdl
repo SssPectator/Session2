@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pm01v2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Chief_experts">
+    <Key>
+      <PropertyRef Name="ID_CHIEF" />
+    </Key>
+    <Property Name="ID_CHIEF" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ФИО" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Сертификат" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="exam_id" Type="Int32" />
+    <NavigationProperty Name="Demo_exam" Relationship="Self.FK_Chief_experts_Demo_exam" FromRole="Chief_experts" ToRole="Demo_exam" />
+  </EntityType>
+  <EntityType Name="Demo_exam">
+    <Key>
+      <PropertyRef Name="ID_EXAM" />
+    </Key>
+    <Property Name="ID_EXAM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_WSR" Type="Int32" Nullable="false" />
+    <Property Name="Компетенция" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Дата_проведения" Type="DateTime" Precision="0" />
+    <Property Name="Кол_во_участников" Type="Int32" />
+    <Property Name="Кол_во_линейных" Type="Int32" />
+    <Property Name="Кол_вотехнических" Type="Int32" />
+    <Property Name="Кол_во_главных" Type="Int32" />
+    <Property Name="ЦПДЭ" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Учреждение" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Chief_experts" Relationship="Self.FK_Chief_experts_Demo_exam" FromRole="Demo_exam" ToRole="Chief_experts" />
+    <NavigationProperty Name="Line_experts" Relationship="Self.FK_Line_experts_Demo_exam" FromRole="Demo_exam" ToRole="Line_experts" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_Members_Demo_exam" FromRole="Demo_exam" ToRole="Members" />
+    <NavigationProperty Name="techical_experts" Relationship="Self.FK_techical_experts_Demo_exam" FromRole="Demo_exam" ToRole="techical_experts" />
+  </EntityType>
+  <EntityType Name="Line_experts">
+    <Key>
+      <PropertyRef Name="ID_LINE" />
+    </Key>
+    <Property Name="ID_LINE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ФИО" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Сертификат" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="exam_id" Type="Int32" />
+    <NavigationProperty Name="Demo_exam" Relationship="Self.FK_Line_experts_Demo_exam" FromRole="Line_experts" ToRole="Demo_exam" />
+  </EntityType>
+  <EntityType Name="Members">
+    <Key>
+      <PropertyRef Name="ID_MEMBERS" />
+    </Key>
+    <Property Name="ID_MEMBERS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ФИО" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Учреждение" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="exam_id" Type="Int32" />
+    <NavigationProperty Name="Demo_exam" Relationship="Self.FK_Members_Demo_exam" FromRole="Members" ToRole="Demo_exam" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="techical_experts">
+    <Key>
+      <PropertyRef Name="ID_TECHICAL" />
+    </Key>
+    <Property Name="ID_TECHICAL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ФИО" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Сертификат" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="exam_id" Type="Int32" />
+    <NavigationProperty Name="Demo_exam" Relationship="Self.FK_techical_experts_Demo_exam" FromRole="techical_experts" ToRole="Demo_exam" />
+  </EntityType>
+  <Association Name="FK_Chief_experts_Demo_exam">
+    <End Role="Demo_exam" Type="Self.Demo_exam" Multiplicity="0..1" />
+    <End Role="Chief_experts" Type="Self.Chief_experts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Demo_exam">
+        <PropertyRef Name="ID_EXAM" />
+      </Principal>
+      <Dependent Role="Chief_experts">
+        <PropertyRef Name="exam_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Line_experts_Demo_exam">
+    <End Role="Demo_exam" Type="Self.Demo_exam" Multiplicity="0..1" />
+    <End Role="Line_experts" Type="Self.Line_experts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Demo_exam">
+        <PropertyRef Name="ID_EXAM" />
+      </Principal>
+      <Dependent Role="Line_experts">
+        <PropertyRef Name="exam_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_Demo_exam">
+    <End Role="Demo_exam" Type="Self.Demo_exam" Multiplicity="0..1" />
+    <End Role="Members" Type="Self.Members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Demo_exam">
+        <PropertyRef Name="ID_EXAM" />
+      </Principal>
+      <Dependent Role="Members">
+        <PropertyRef Name="exam_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_techical_experts_Demo_exam">
+    <End Role="Demo_exam" Type="Self.Demo_exam" Multiplicity="0..1" />
+    <End Role="techical_experts" Type="Self.techical_experts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Demo_exam">
+        <PropertyRef Name="ID_EXAM" />
+      </Principal>
+      <Dependent Role="techical_experts">
+        <PropertyRef Name="exam_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="pm01v2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Chief_experts" EntityType="Self.Chief_experts" />
+    <EntitySet Name="Demo_exam" EntityType="Self.Demo_exam" />
+    <EntitySet Name="Line_experts" EntityType="Self.Line_experts" />
+    <EntitySet Name="Members" EntityType="Self.Members" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="techical_experts" EntityType="Self.techical_experts" />
+    <AssociationSet Name="FK_Chief_experts_Demo_exam" Association="Self.FK_Chief_experts_Demo_exam">
+      <End Role="Demo_exam" EntitySet="Demo_exam" />
+      <End Role="Chief_experts" EntitySet="Chief_experts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Line_experts_Demo_exam" Association="Self.FK_Line_experts_Demo_exam">
+      <End Role="Demo_exam" EntitySet="Demo_exam" />
+      <End Role="Line_experts" EntitySet="Line_experts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_Demo_exam" Association="Self.FK_Members_Demo_exam">
+      <End Role="Demo_exam" EntitySet="Demo_exam" />
+      <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_techical_experts_Demo_exam" Association="Self.FK_techical_experts_Demo_exam">
+      <End Role="Demo_exam" EntitySet="Demo_exam" />
+      <End Role="techical_experts" EntitySet="techical_experts" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(pm01v2Model.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(pm01v2Model.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

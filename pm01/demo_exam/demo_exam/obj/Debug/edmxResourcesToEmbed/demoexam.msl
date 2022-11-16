@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище pm01v2ModelContainer" CdmEntityContainer="pm01v2Entities">
+    <EntitySetMapping Name="Chief_experts">
+      <EntityTypeMapping TypeName="pm01v2Model.Chief_experts">
+        <MappingFragment StoreEntitySet="Chief_experts">
+          <ScalarProperty Name="ID_CHIEF" ColumnName="ID_CHIEF" />
+          <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+          <ScalarProperty Name="Сертификат" ColumnName="Сертификат" />
+          <ScalarProperty Name="exam_id" ColumnName="exam_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Demo_exam">
+      <EntityTypeMapping TypeName="pm01v2Model.Demo_exam">
+        <MappingFragment StoreEntitySet="Demo_exam">
+          <ScalarProperty Name="ID_EXAM" ColumnName="ID_EXAM" />
+          <ScalarProperty Name="id_WSR" ColumnName="id_WSR" />
+          <ScalarProperty Name="Компетенция" ColumnName="Компетенция" />
+          <ScalarProperty Name="Дата_проведения" ColumnName="Дата_проведения" />
+          <ScalarProperty Name="Кол_во_участников" ColumnName="Кол_во участников" />
+          <ScalarProperty Name="Кол_во_линейных" ColumnName="Кол_во_линейных" />
+          <ScalarProperty Name="Кол_вотехнических" ColumnName="Кол_вотехнических" />
+          <ScalarProperty Name="Кол_во_главных" ColumnName="Кол_во_главных" />
+          <ScalarProperty Name="ЦПДЭ" ColumnName="ЦПДЭ" />
+          <ScalarProperty Name="Учреждение" ColumnName="Учреждение" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Line_experts">
+      <EntityTypeMapping TypeName="pm01v2Model.Line_experts">
+        <MappingFragment StoreEntitySet="Line_experts">
+          <ScalarProperty Name="ID_LINE" ColumnName="ID_LINE" />
+          <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+          <ScalarProperty Name="Сертификат" ColumnName="Сертификат" />
+          <ScalarProperty Name="exam_id" ColumnName="exam_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Members">
+      <EntityTypeMapping TypeName="pm01v2Model.Members">
+        <MappingFragment StoreEntitySet="Members">
+          <ScalarProperty Name="ID_MEMBERS" ColumnName="ID_MEMBERS" />
+          <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+          <ScalarProperty Name="Учреждение" ColumnName="Учреждение" />
+          <ScalarProperty Name="exam_id" ColumnName="exam_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="pm01v2Model.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="techical_experts">
+      <EntityTypeMapping TypeName="pm01v2Model.techical_experts">
+        <MappingFragment StoreEntitySet="techical_experts">
+          <ScalarProperty Name="ID_TECHICAL" ColumnName="ID_TECHICAL" />
+          <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+          <ScalarProperty Name="Сертификат" ColumnName="Сертификат" />
+          <ScalarProperty Name="exam_id" ColumnName="exam_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище pm01v2Model.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище pm01v2Model.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище pm01v2Model.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище pm01v2Model.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="pm01v2Model.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище pm01v2Model.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="pm01v2Model.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище pm01v2Model.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище pm01v2Model.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>

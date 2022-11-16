@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище pm01v2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Chief_experts">
+    <Key>
+      <PropertyRef Name="ID_CHIEF" />
+    </Key>
+    <Property Name="ID_CHIEF" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ФИО" Type="varchar" MaxLength="255" />
+    <Property Name="Сертификат" Type="varchar" MaxLength="255" />
+    <Property Name="exam_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Demo_exam">
+    <Key>
+      <PropertyRef Name="ID_EXAM" />
+    </Key>
+    <Property Name="ID_EXAM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_WSR" Type="int" Nullable="false" />
+    <Property Name="Компетенция" Type="varchar" MaxLength="255" />
+    <Property Name="Дата_проведения" Type="date" />
+    <Property Name="Кол_во участников" Type="int" />
+    <Property Name="Кол_во_линейных" Type="int" />
+    <Property Name="Кол_вотехнических" Type="int" />
+    <Property Name="Кол_во_главных" Type="int" />
+    <Property Name="ЦПДЭ" Type="varchar" MaxLength="255" />
+    <Property Name="Учреждение" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Line_experts">
+    <Key>
+      <PropertyRef Name="ID_LINE" />
+    </Key>
+    <Property Name="ID_LINE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ФИО" Type="varchar" MaxLength="255" />
+    <Property Name="Сертификат" Type="varchar" MaxLength="255" />
+    <Property Name="exam_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Members">
+    <Key>
+      <PropertyRef Name="ID_MEMBERS" />
+    </Key>
+    <Property Name="ID_MEMBERS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ФИО" Type="varchar" MaxLength="255" />
+    <Property Name="Учреждение" Type="varchar" MaxLength="255" />
+    <Property Name="exam_id" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="techical_experts">
+    <Key>
+      <PropertyRef Name="ID_TECHICAL" />
+    </Key>
+    <Property Name="ID_TECHICAL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ФИО" Type="varchar" MaxLength="255" />
+    <Property Name="Сертификат" Type="varchar" MaxLength="255" />
+    <Property Name="exam_id" Type="int" />
+  </EntityType>
+  <Association Name="FK_Chief_experts_Demo_exam">
+    <End Role="Demo_exam" Type="Self.Demo_exam" Multiplicity="0..1" />
+    <End Role="Chief_experts" Type="Self.Chief_experts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Demo_exam">
+        <PropertyRef Name="ID_EXAM" />
+      </Principal>
+      <Dependent Role="Chief_experts">
+        <PropertyRef Name="exam_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Line_experts_Demo_exam">
+    <End Role="Demo_exam" Type="Self.Demo_exam" Multiplicity="0..1" />
+    <End Role="Line_experts" Type="Self.Line_experts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Demo_exam">
+        <PropertyRef Name="ID_EXAM" />
+      </Principal>
+      <Dependent Role="Line_experts">
+        <PropertyRef Name="exam_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_Demo_exam">
+    <End Role="Demo_exam" Type="Self.Demo_exam" Multiplicity="0..1" />
+    <End Role="Members" Type="Self.Members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Demo_exam">
+        <PropertyRef Name="ID_EXAM" />
+      </Principal>
+      <Dependent Role="Members">
+        <PropertyRef Name="exam_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_techical_experts_Demo_exam">
+    <End Role="Demo_exam" Type="Self.Demo_exam" Multiplicity="0..1" />
+    <End Role="techical_experts" Type="Self.techical_experts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Demo_exam">
+        <PropertyRef Name="ID_EXAM" />
+      </Principal>
+      <Dependent Role="techical_experts">
+        <PropertyRef Name="exam_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Хранилище pm01v2ModelContainer">
+    <EntitySet Name="Chief_experts" EntityType="Self.Chief_experts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Demo_exam" EntityType="Self.Demo_exam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Line_experts" EntityType="Self.Line_experts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="techical_experts" EntityType="Self.techical_experts" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Chief_experts_Demo_exam" Association="Self.FK_Chief_experts_Demo_exam">
+      <End Role="Demo_exam" EntitySet="Demo_exam" />
+      <End Role="Chief_experts" EntitySet="Chief_experts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Line_experts_Demo_exam" Association="Self.FK_Line_experts_Demo_exam">
+      <End Role="Demo_exam" EntitySet="Demo_exam" />
+      <End Role="Line_experts" EntitySet="Line_experts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_Demo_exam" Association="Self.FK_Members_Demo_exam">
+      <End Role="Demo_exam" EntitySet="Demo_exam" />
+      <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_techical_experts_Demo_exam" Association="Self.FK_techical_experts_Demo_exam">
+      <End Role="Demo_exam" EntitySet="Demo_exam" />
+      <End Role="techical_experts" EntitySet="techical_experts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

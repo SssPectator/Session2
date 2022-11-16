@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ea3af4db81e341ffb620fcbcb025b039" Name="Diagram1">
+        <EntityTypeShape EntityType="pm01v2Model.Chief_experts" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="pm01v2Model.Demo_exam" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="pm01v2Model.Line_experts" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="pm01v2Model.Members" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="pm01v2Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="pm01v2Model.techical_experts" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <AssociationConnector Association="pm01v2Model.FK_Chief_experts_Demo_exam" ManuallyRouted="false" />
+        <AssociationConnector Association="pm01v2Model.FK_Line_experts_Demo_exam" ManuallyRouted="false" />
+        <AssociationConnector Association="pm01v2Model.FK_Members_Demo_exam" ManuallyRouted="false" />
+        <AssociationConnector Association="pm01v2Model.FK_techical_experts_Demo_exam" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
